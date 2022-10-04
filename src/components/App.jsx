@@ -52,13 +52,14 @@ const handleFormSubmit = pictureName => {
     setPage(1);
   setPictureName({ pictureName });
   setPictureData('');
+  // setIsLoadingMore(true)
   };
 
   // функция загрузки новых 12 картинок
   const loadMore = () => {
     setPage(prevState => 
       prevState.page + 1)
-    setIsLoadingMore('true')
+    // setIsLoadingMore('true')
   };
 
   const pictureModalClick = picture => {
@@ -96,7 +97,7 @@ const handleFormSubmit = pictureName => {
         ></ImageGallery>
       )}
       {status === 'pending' && <LoaderSpiner />}
-      {IsLoadingMore && <LoadMore onClick={loadMore} />}
+      {IsLoadingMore('true') && <LoadMore onClick={loadMore} />}
       {pictureModal.length > 0 && (
         <Modal onClose={closeModal}>
           <img src={pictureModal} alt="" />
