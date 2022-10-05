@@ -33,34 +33,67 @@ export default function App() {
     if (!pictureName) {
       return;
     }
-    
+
     setStatus('pending');
+
+  //   api
+  //     .fetchPicture(pictureName, page)
+  //     .then(res => {
+  //       setPictureData(state => [...state, ...mapper(res.data.hits)]);
+  //       setStatus('resolved');
+  //       if (res.data.hits.length === 0) {
+  //         toast.error('There is no picture for that name');
+  //       }
+  //     })
+  //     .catch(error => console.log(error));
+  // }, [page, pictureName]);
+
     api
       .fetchPicture(pictureName, page)
       .then(res => {
-        setPictureData(state => [...state, ...mapper(res.data.hits)]);
-        setStatus('resolved');
         if (res.data.hits.length === 0) {
           toast.error('There is no picture for that name');
+          setStatus(null);
+          setIsLoadingMore(false);
+          return;
+          // змінити статус
+        }
+
+setPictureData(state => [...state, ...mapper(res.data.hits)]);
+        setStatus('resolved');
+
+        const lengthData = (page - 1) * 12 + res.data.hits.length;
+
+        if (lengthData >= res.data.totalHits) {
+          setIsLoadingMore(false);
+        } else {
+          setIsLoadingMore(true);
         }
       })
       .catch(error => console.log(error));
   }, [page, pictureName]);
 
+
+    
 const handleFormSubmit = pictureName => {
     // перезапись на новые 12 картинок при вводе новой строки валидной
     setPage(1);
   setPictureName({ pictureName });
   setPictureData('');
-  setIsLoadingMore(true)
+  setIsLoadingMore(false)
   };
 
   // функция загрузки новых 12 картинок
   const loadMore = () => {
-    setPage(prevState => 
-      prevState.page + 1)
-    
+    setPage(page => page + 1)
+    // setIsLoadingMore(true)
   };
+
+// if (newPictures.length !== data.totalHits) {
+//           setLoadMore(true);
+//         } else {
+//           setLoadMore(false);
+//         }
 
   const pictureModalClick = picture => {
       setPictureModal(picture)
