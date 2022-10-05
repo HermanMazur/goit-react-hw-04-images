@@ -15,20 +15,7 @@ export default function App() {
   const [status, setStatus] = useState('');
   const [page, setPage] = useState('');
   const [IsLoadingMore, setIsLoadingMore] = useState(false);
-  // state = {
-  //   pictureName: '',
-  //   pictureData: '',
-  //   pictureModal: '',
-  //   status: 'idle',
-  //   page: 1,
-  //   IsLoadingMore: false,
-  // };
-
-  // componentDidUpdate(prevState, prevProps) {
-  //   const prevSearch = prevProps.pictureName;
-  //   const nextSearch = this.state.pictureName;
-  //   const prevPage = prevProps.page;
-  //   const nextPage = this.state.page;
+  
   useEffect(() => {
     if (!pictureName) {
       return;
@@ -86,14 +73,8 @@ const handleFormSubmit = pictureName => {
   // функция загрузки новых 12 картинок
   const loadMore = () => {
     setPage(page => page + 1)
-    // setIsLoadingMore(true)
   };
 
-// if (newPictures.length !== data.totalHits) {
-//           setLoadMore(true);
-//         } else {
-//           setLoadMore(false);
-//         }
 
   const pictureModalClick = picture => {
       setPictureModal(picture)
@@ -104,22 +85,6 @@ const handleFormSubmit = pictureName => {
     setPictureModal('')
   };
 
-  // скидываем страницу на 1 при новой валидной строки
-  // resetPage() {
-  //   this.setState({
-  //     page: 1,
-  //   });
-  // }
-
-  // // скидываем инпут поиска на 0
-  // resetData() {
-  //   this.setState({
-  //     pictureData: '',
-  //     IsLoadingMore: false,
-  //   });
-  // }
-
-    // const { status, pictureData, pictureModal, IsLoadingMore } = this.state;
   return (
     <div>
       <Searchbar onSubmit={handleFormSubmit} />
