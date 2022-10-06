@@ -17,6 +17,7 @@ export default function App() {
   const [IsLoadingMore, setIsLoadingMore] = useState(false);
   
   useEffect(() => {
+    // первый рендер с пустой строкой пропускается не делаем фетч
     if (!pictureName) {
       return;
     }
@@ -48,8 +49,6 @@ setPictureData(state => [...state, ...mapper(res.data.hits)]);
       .catch(error => console.log(error));
   }, [page, pictureName]);
 
-
-    
 const handleFormSubmit = pictureName => {
     // перезапись на новые 12 картинок при вводе новой строки валидной
     setPage(1);
@@ -62,7 +61,6 @@ const handleFormSubmit = pictureName => {
   const loadMore = () => {
     setPage(page => page + 1)
   };
-
 
   const pictureModalClick = picture => {
       setPictureModal(picture)
