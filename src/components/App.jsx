@@ -23,18 +23,6 @@ export default function App() {
 
     setStatus('pending');
 
-  //   api
-  //     .fetchPicture(pictureName, page)
-  //     .then(res => {
-  //       setPictureData(state => [...state, ...mapper(res.data.hits)]);
-  //       setStatus('resolved');
-  //       if (res.data.hits.length === 0) {
-  //         toast.error('There is no picture for that name');
-  //       }
-  //     })
-  //     .catch(error => console.log(error));
-  // }, [page, pictureName]);
-
     api
       .fetchPicture(pictureName, page)
       .then(res => {
